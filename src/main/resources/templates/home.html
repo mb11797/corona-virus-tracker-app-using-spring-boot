@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Corona Virus Tracker App</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Corona Virus Tracker App</h1>
+            <p>This application lists the current reported number of cases accross the Globe</p>
+            
+            <div class="jumbotron">
+                <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+                <p class="lead">Total Cases Reported as of Today</p>
+                <hr class="my-4">
+                <p>
+                    <span>New Cases Reported since the previous Day</span>
+                    <span th:text="${totalNewCases}"></span>
+                </p>
+            </div>
+            <table class="table table-success table-striped">
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">State</th>
+                      <th scope="col">Country</th>
+                      <th scope="col">Total Cases Reported</th>
+                      <th scope="col">Changes since Last Day</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="locationStat, counter : ${locationStats}">
+                        <th scope="row" th:text="${counter.count}"></th>
+                        <td th:text="${locationStat.state}"></td>
+                        <td th:text="${locationStat.country}"></td>
+                        <td th:text="${locationStat.latestTotalCases}"></td>
+                        <td th:text="${locationStat.diffFromPrevDay}"></td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+    </body>
+</html>
